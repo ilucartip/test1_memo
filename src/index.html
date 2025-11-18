@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test1_memo - シンプルメモアプリ</title>
+    <!-- CSSファイルの読み込み -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- メインコンテナ -->
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="header">
+            <h1>test1_memo</h1>
+            <!-- 検索バー -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="メモを検索...">
+            </div>
+        </header>
+
+        <!-- メインコンテンツエリア -->
+        <main class="main-content">
+            <!-- 左サイドバー: フォルダ一覧 -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2>フォルダ</h2>
+                    <button id="newFolderBtn" class="btn-new">+ 新規</button>
+                </div>
+                <ul id="folderList" class="folder-list">
+                    <!-- JavaScriptで動的に追加 -->
+                </ul>
+            </aside>
+
+            <!-- 中央: メモ一覧 -->
+            <section class="memo-list-section">
+                <div class="section-header">
+                    <h2>メモ一覧</h2>
+                    <button id="newMemoBtn" class="btn-new">+ 新規メモ</button>
+                </div>
+                <ul id="memoList" class="memo-list">
+                    <!-- JavaScriptで動的に追加 -->
+                </ul>
+            </section>
+
+            <!-- 右側: メモ編集エリア -->
+            <section class="memo-editor-section">
+                <div class="editor-header">
+                    <input type="text" id="memoTitle" placeholder="タイトル" class="memo-title-input">
+                    <div class="editor-actions">
+                        <button id="saveMemoBtn" class="btn-primary">保存</button>
+                        <button id="deleteMemoBtn" class="btn-danger">削除</button>
+                    </div>
+                </div>
+                <textarea id="memoContent" placeholder="ここにメモを入力してください..." class="memo-content-textarea"></textarea>
+                <div class="memo-info">
+                    <span id="memoInfo"></span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- JavaScriptファイルの読み込み -->
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

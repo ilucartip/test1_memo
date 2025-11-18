@@ -1,0 +1,348 @@
+/* ========================================
+   リセットと基本スタイル
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', 'Hiragino Sans', sans-serif;
+    font-size: 14px;
+    color: #333;
+    background-color: #f5f5f5;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* ========================================
+   コンテナとレイアウト
+   ======================================== */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* ========================================
+   ヘッダー
+   ======================================== */
+
+.header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.search-box {
+    flex: 0 0 300px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+}
+
+/* ========================================
+   メインコンテンツエリア
+   ======================================== */
+
+.main-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* ========================================
+   サイドバー（フォルダ一覧）
+   ======================================== */
+
+.sidebar {
+    width: 200px;
+    background-color: #34495e;
+    color: white;
+    padding: 15px;
+    overflow-y: auto;
+    border-right: 1px solid #2c3e50;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.sidebar-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.folder-list {
+    list-style: none;
+}
+
+.folder-item {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.folder-item:hover {
+    background-color: #3d566e;
+}
+
+.folder-item.active {
+    background-color: #4a90e2;
+}
+
+.folder-name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.folder-delete-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 12px;
+    padding: 2px 5px;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.folder-item:hover .folder-delete-btn {
+    opacity: 1;
+}
+
+/* ========================================
+   メモ一覧セクション
+   ======================================== */
+
+.memo-list-section {
+    width: 250px;
+    background-color: #ecf0f1;
+    padding: 15px;
+    overflow-y: auto;
+    border-right: 1px solid #bdc3c7;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.memo-list {
+    list-style: none;
+}
+
+.memo-item {
+    padding: 12px;
+    margin-bottom: 8px;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.memo-item:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateX(2px);
+}
+
+.memo-item.active {
+    border-left-color: #4a90e2;
+    background-color: #e8f4ff;
+}
+
+.memo-item-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: #2c3e50;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.memo-item-preview {
+    font-size: 12px;
+    color: #7f8c8d;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.memo-item-date {
+    font-size: 11px;
+    color: #95a5a6;
+    margin-top: 4px;
+}
+
+/* ========================================
+   メモ編集エリア
+   ======================================== */
+
+.memo-editor-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    overflow: hidden;
+}
+
+.editor-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #ecf0f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.memo-title-input {
+    flex: 1;
+    border: none;
+    font-size: 24px;
+    font-weight: 600;
+    outline: none;
+    color: #2c3e50;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.memo-content-textarea {
+    flex: 1;
+    border: none;
+    padding: 20px;
+    font-size: 16px;
+    font-family: inherit;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+    overflow-y: auto;
+}
+
+.memo-info {
+    padding: 10px 20px;
+    border-top: 1px solid #ecf0f1;
+    font-size: 12px;
+    color: #95a5a6;
+    background-color: #fafafa;
+}
+
+/* ========================================
+   ボタンスタイル
+   ======================================== */
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+}
+
+.btn-new {
+    background-color: transparent;
+    border: 1px solid currentColor;
+    color: inherit;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.btn-new:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-primary:hover {
+    background-color: #357abd;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+/* ========================================
+   スクロールバーのスタイル（Webkit系ブラウザ）
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #bdc3c7;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #95a5a6;
+}
+
+/* ========================================
+   空の状態メッセージ
+   ======================================== */
+
+.empty-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #95a5a6;
+    font-size: 14px;
+}
