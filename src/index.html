@@ -19,6 +19,11 @@
             </div>
         </header>
 
+        <!-- 成功メッセージ -->
+        <div id="successMessage" class="success-message hidden">
+            <span id="successMessageText"></span>
+        </div>
+
         <!-- メインコンテンツエリア -->
         <main class="main-content">
             <!-- 左サイドバー: フォルダ一覧 -->
@@ -48,11 +53,72 @@
                 <div class="editor-header">
                     <input type="text" id="memoTitle" placeholder="タイトル" class="memo-title-input">
                     <div class="editor-actions">
+                        <select id="memoFolderSelect" class="folder-select">
+                            <!-- JavaScriptで動的に追加 -->
+                        </select>
                         <button id="saveMemoBtn" class="btn-primary">保存</button>
                         <button id="deleteMemoBtn" class="btn-danger">削除</button>
                     </div>
                 </div>
-                <textarea id="memoContent" placeholder="ここにメモを入力してください..." class="memo-content-textarea"></textarea>
+                <div class="editor-content-area">
+                    <textarea id="memoContent" placeholder="ここにメモを入力してください..." class="memo-content-textarea"></textarea>
+                    <!-- 使い方ガイド（メモ未選択時に表示） -->
+                    <div id="usageGuide" class="usage-guide">
+                        <div class="usage-guide-content">
+                            <h2>📝 test1_memo へようこそ！</h2>
+                            <p class="usage-guide-intro">シンプルなメモアプリの使い方</p>
+
+                            <div class="usage-steps">
+                                <div class="usage-step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h3>フォルダを作成</h3>
+                                        <p>左サイドバーの「<strong>+ 新規</strong>」ボタンでフォルダを作成できます</p>
+                                    </div>
+                                </div>
+
+                                <div class="usage-step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h3>メモを作成</h3>
+                                        <p>「<strong>+ 新規メモ</strong>」ボタンをクリックして新しいメモを作成</p>
+                                    </div>
+                                </div>
+
+                                <div class="usage-step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h3>メモを編集</h3>
+                                        <p>タイトルと本文を入力すると<strong>自動的に保存</strong>されます</p>
+                                        <p class="keyboard-shortcut">💡 ショートカット: <kbd>Ctrl+S</kbd> で手動保存、<kbd>Ctrl+N</kbd> で新規メモ</p>
+                                    </div>
+                                </div>
+
+                                <div class="usage-step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h3>メモを検索</h3>
+                                        <p>上部の検索バーでメモをリアルタイム検索できます</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="usage-caution">
+                                <h3>⚠️ 注意点</h3>
+                                <ul>
+                                    <li>メモはブラウザの<strong>LocalStorage</strong>に保存されます</li>
+                                    <li>ブラウザのキャッシュをクリアすると<strong>メモが消えます</strong></li>
+                                    <li>別のブラウザや端末では<strong>同じメモを見ることができません</strong></li>
+                                    <li>プライベートブラウジングモードでは保存されません</li>
+                                </ul>
+                            </div>
+
+                            <div class="usage-guide-footer">
+                                <p>さあ、「<strong>+ 新規メモ</strong>」ボタンをクリックして始めましょう！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="memo-info">
                     <span id="memoInfo"></span>
                 </div>

@@ -60,6 +60,57 @@ body {
 }
 
 /* ========================================
+   成功メッセージ
+   ======================================== */
+
+.success-message {
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    animation: slideDown 0.3s ease-out;
+}
+
+.success-message.hidden {
+    display: none;
+}
+
+.success-message.fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* ========================================
    メインコンテンツエリア
    ======================================== */
 
@@ -243,10 +294,45 @@ body {
 .editor-actions {
     display: flex;
     gap: 10px;
+    align-items: center;
+}
+
+.folder-select {
+    padding: 8px 12px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #2c3e50;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.folder-select:hover {
+    border-color: #4a90e2;
+}
+
+.folder-select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.folder-select:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.editor-content-area {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
 }
 
 .memo-content-textarea {
-    flex: 1;
+    width: 100%;
+    height: 100%;
     border: none;
     padding: 20px;
     font-size: 16px;
@@ -345,4 +431,181 @@ button {
     padding: 40px 20px;
     color: #95a5a6;
     font-size: 14px;
+}
+
+/* ========================================
+   無効化された要素のスタイル
+   ======================================== */
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+button:disabled:hover {
+    background-color: inherit;
+    transform: none;
+}
+
+.btn-primary:disabled {
+    background-color: #4a90e2;
+}
+
+.btn-danger:disabled {
+    background-color: #e74c3c;
+}
+
+input:disabled,
+textarea:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+    color: #95a5a6;
+}
+
+/* ========================================
+   使い方ガイド
+   ======================================== */
+
+.usage-guide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    padding: 40px;
+    overflow-y: auto;
+}
+
+.usage-guide.hidden {
+    display: none;
+}
+
+.usage-guide-content {
+    max-width: 600px;
+    width: 100%;
+}
+
+.usage-guide-content h2 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.usage-guide-intro {
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 15px;
+    margin-bottom: 35px;
+}
+
+.usage-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.usage-step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.step-number {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background-color: #4a90e2;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content h3 {
+    font-size: 16px;
+    color: #2c3e50;
+    margin-bottom: 6px;
+}
+
+.step-content p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 4px;
+    font-size: 14px;
+}
+
+.keyboard-shortcut {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-top: 6px;
+}
+
+.keyboard-shortcut kbd {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-family: monospace;
+    font-size: 11px;
+}
+
+.usage-caution {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    border-radius: 4px;
+}
+
+.usage-caution h3 {
+    font-size: 15px;
+    color: #856404;
+    margin-bottom: 12px;
+}
+
+.usage-caution ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.usage-caution li {
+    font-size: 13px;
+    color: #856404;
+    line-height: 1.8;
+    padding-left: 20px;
+    position: relative;
+}
+
+.usage-caution li::before {
+    content: "•";
+    position: absolute;
+    left: 8px;
+    font-weight: bold;
+}
+
+.usage-guide-footer {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 2px solid #e0e0e0;
+    text-align: center;
+}
+
+.usage-guide-footer p {
+    font-size: 16px;
+    color: #4a90e2;
+    font-weight: 500;
 }

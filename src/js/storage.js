@@ -82,7 +82,7 @@ const Storage = {
      */
     generateId: function() {
         // タイムスタンプとランダム数値を組み合わせて一意のIDを生成
-        return Date.now().toString() + '-' + Math.random().toString(36).substr(2, 9);
+        return Date.now().toString() + '-' + Math.random().toString(36).slice(2, 11);
     },
 
     /**
@@ -283,6 +283,34 @@ const MemoManager = {
             const contentMatch = memo.content.toLowerCase().includes(lowerQuery);
             return titleMatch || contentMatch;
         });
+    },
+
+    /**
+     * メモを別のフォルダに移動
+     * @param {string} memoId - メモID
+     * @param {string} newFolderId - 移動先のフォルダID
+     */
+    moveToFolder: function(memoId, newFolderId) {
+        const data = Storage.load();
+
+        const memoIndex = data.memos.findIndex(memo => memo.id === memoId);
+        if (memoIndex === -1) {
+            console.error('メモが見つかりません:', memoId);
+            return;
+        }
+
+        // フォルダが存在するか確認
+        const folderExists = data.folders.some(folder => folder.id === newFolderId);
+        if (!folderExists) {
+            console.error('フォルダが見つかりません:', newFolderId);
+            return;
+        }
+
+        // メモのフォルダを変更
+        data.memos[memoIndex].folderId = newFolderId;
+        data.memos[memoIndex].updatedAt = new Date().toISOString();
+
+        Storage.save(data);
     }
 };
 

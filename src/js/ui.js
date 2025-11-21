@@ -204,9 +204,15 @@ const UI = {
             return;
         }
 
+        // エディタを有効化
+        this.enableEditor();
+
         // タイトルと本文を設定
         document.getElementById('memoTitle').value = memo.title;
         document.getElementById('memoContent').value = memo.content;
+
+        // フォルダ選択を更新
+        this.renderFolderSelect(memo.folderId);
 
         // メモ情報を表示
         this.updateMemoInfo(memo);
@@ -219,6 +225,57 @@ const UI = {
         document.getElementById('memoTitle').value = '';
         document.getElementById('memoContent').value = '';
         document.getElementById('memoInfo').textContent = '';
+        this.disableEditor();
+    },
+
+    /**
+     * エディタを無効化
+     */
+    disableEditor: function() {
+        const memoTitle = document.getElementById('memoTitle');
+        const memoContent = document.getElementById('memoContent');
+        const memoFolderSelect = document.getElementById('memoFolderSelect');
+        const saveMemoBtn = document.getElementById('saveMemoBtn');
+        const deleteMemoBtn = document.getElementById('deleteMemoBtn');
+        const usageGuide = document.getElementById('usageGuide');
+
+        memoTitle.disabled = true;
+        memoContent.disabled = true;
+        memoFolderSelect.disabled = true;
+        saveMemoBtn.disabled = true;
+        deleteMemoBtn.disabled = true;
+        memoTitle.placeholder = '「+ 新規メモ」ボタンでメモを作成してください';
+        memoContent.placeholder = '「+ 新規メモ」ボタンでメモを作成してください';
+
+        // 使い方ガイドを表示
+        if (usageGuide) {
+            usageGuide.classList.remove('hidden');
+        }
+    },
+
+    /**
+     * エディタを有効化
+     */
+    enableEditor: function() {
+        const memoTitle = document.getElementById('memoTitle');
+        const memoContent = document.getElementById('memoContent');
+        const memoFolderSelect = document.getElementById('memoFolderSelect');
+        const saveMemoBtn = document.getElementById('saveMemoBtn');
+        const deleteMemoBtn = document.getElementById('deleteMemoBtn');
+        const usageGuide = document.getElementById('usageGuide');
+
+        memoTitle.disabled = false;
+        memoContent.disabled = false;
+        memoFolderSelect.disabled = false;
+        saveMemoBtn.disabled = false;
+        deleteMemoBtn.disabled = false;
+        memoTitle.placeholder = 'タイトル';
+        memoContent.placeholder = 'ここにメモを入力してください...';
+
+        // 使い方ガイドを非表示
+        if (usageGuide) {
+            usageGuide.classList.add('hidden');
+        }
     },
 
     /**
@@ -232,6 +289,29 @@ const UI = {
 
         const infoText = `作成: ${createdDate} | 更新: ${updatedDate} | 文字数: ${charCount.toLocaleString()}`;
         document.getElementById('memoInfo').textContent = infoText;
+    },
+
+    /**
+     * フォルダ選択のドロップダウンを更新
+     * @param {string} currentFolderId - 現在選択中のフォルダID
+     */
+    renderFolderSelect: function(currentFolderId) {
+        const folders = FolderManager.getAll();
+        const folderSelect = document.getElementById('memoFolderSelect');
+
+        // 既存のオプションをクリア
+        folderSelect.innerHTML = '';
+
+        // 各フォルダをオプションとして追加
+        folders.forEach(folder => {
+            const option = document.createElement('option');
+            option.value = folder.id;
+            option.textContent = folder.name;
+            if (folder.id === currentFolderId) {
+                option.selected = true;
+            }
+            folderSelect.appendChild(option);
+        });
     },
 
     /**
@@ -334,5 +414,31 @@ const UI = {
             this.renderMemos();
             this.clearEditor();
         }
+    },
+
+    /**
+     * 成功メッセージを表示
+     * @param {string} message - 表示するメッセージ
+     */
+    showSuccessMessage: function(message) {
+        const messageEl = document.getElementById('successMessage');
+        const messageText = document.getElementById('successMessageText');
+
+        // メッセージテキストを設定
+        messageText.textContent = '✓ ' + message;
+
+        // hiddenクラスを削除して表示
+        messageEl.classList.remove('hidden', 'fade-out');
+
+        // 2秒後にフェードアウト開始
+        setTimeout(() => {
+            messageEl.classList.add('fade-out');
+        }, 2000);
+
+        // フェードアウトアニメーション完了後に非表示
+        setTimeout(() => {
+            messageEl.classList.add('hidden');
+            messageEl.classList.remove('fade-out');
+        }, 2300);
     }
 };

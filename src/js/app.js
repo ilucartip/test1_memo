@@ -36,6 +36,9 @@ function initializeApp() {
         const initialData = Storage.getInitialData();
         Storage.save(initialData);
     }
+
+    // 毎回ガイドを表示するために、選択中のメモをクリア
+    SettingsManager.setCurrentMemoId(null);
 }
 
 /**
@@ -71,6 +74,29 @@ function setupEventListeners() {
     if (deleteMemoBtn) {
         deleteMemoBtn.addEventListener('click', function() {
             UI.deleteMemo();
+        });
+    }
+
+    // フォルダ選択
+    const memoFolderSelect = document.getElementById('memoFolderSelect');
+    if (memoFolderSelect) {
+        memoFolderSelect.addEventListener('change', function(e) {
+            const currentMemoId = SettingsManager.getCurrentMemoId();
+            const newFolderId = e.target.value;
+
+            if (currentMemoId && newFolderId) {
+                // メモを新しいフォルダに移動
+                MemoManager.moveToFolder(currentMemoId, newFolderId);
+
+                // 現在のフォルダを変更
+                SettingsManager.setCurrentFolderId(newFolderId);
+
+                // メモ一覧を更新
+                UI.renderMemos();
+
+                // 成功メッセージを表示
+                UI.showSuccessMessage('フォルダを移動しました');
+            }
         });
     }
 
@@ -171,6 +197,9 @@ function renderAll() {
     const currentMemoId = SettingsManager.getCurrentMemoId();
     if (currentMemoId) {
         UI.loadMemoToEditor(currentMemoId);
+    } else {
+        // メモが選択されていない場合はエディタをクリアして無効化
+        UI.clearEditor();
     }
 }
 
