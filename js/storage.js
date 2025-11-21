@@ -90,6 +90,41 @@ const Storage = {
      */
     clear: function() {
         localStorage.removeItem(STORAGE_KEY);
+    },
+
+    /**
+     * データをエクスポート（JSON形式）
+     * @returns {string} JSON文字列
+     */
+    export: function() {
+        const data = this.load();
+        return JSON.stringify(data, null, 2);
+    },
+
+    /**
+     * データをインポート（JSON形式）
+     * @param {string} jsonString - インポートするJSON文字列
+     * @returns {boolean} 成功したかどうか
+     */
+    import: function(jsonString) {
+        try {
+            const data = JSON.parse(jsonString);
+
+            // データの検証
+            if (!data.folders || !Array.isArray(data.folders)) {
+                throw new Error('無効なデータ形式');
+            }
+            if (!data.memos || !Array.isArray(data.memos)) {
+                throw new Error('無効なデータ形式');
+            }
+
+            // データを保存
+            this.save(data);
+            return true;
+        } catch (error) {
+            console.error('インポートエラー:', error);
+            return false;
+        }
     }
 };
 

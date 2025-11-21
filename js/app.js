@@ -122,6 +122,34 @@ function setupEventListeners() {
         });
     }
 
+    // エクスポートボタン
+    const exportDataBtn = document.getElementById('exportDataBtn');
+    if (exportDataBtn) {
+        exportDataBtn.addEventListener('click', function() {
+            UI.exportData();
+        });
+    }
+
+    // インポートボタン
+    const importDataBtn = document.getElementById('importDataBtn');
+    const importFileInput = document.getElementById('importFileInput');
+    if (importDataBtn && importFileInput) {
+        importDataBtn.addEventListener('click', function() {
+            importFileInput.click();
+        });
+
+        importFileInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (confirm('現在のデータは上書きされます。続けますか？')) {
+                    UI.importData(file);
+                }
+            }
+            // ファイル選択をリセット
+            importFileInput.value = '';
+        });
+    }
+
     // キーボードショートカット
     setupKeyboardShortcuts();
 

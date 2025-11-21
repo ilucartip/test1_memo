@@ -440,5 +440,47 @@ const UI = {
             messageEl.classList.add('hidden');
             messageEl.classList.remove('fade-out');
         }, 2300);
+    },
+
+    /**
+     * データをエクスポート
+     */
+    exportData: function() {
+        const jsonString = Storage.export();
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const timestamp = new Date().toISOString().slice(0, 10);
+        a.href = url;
+        a.download = `test1_memo_backup_${timestamp}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        this.showSuccessMessage('データをエクスポートしました');
+    },
+
+    /**
+     * データをインポート
+     * @param {File} file - インポートするJSONファイル
+     */
+    importData: function(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const jsonString = e.target.result;
+            const success = Storage.import(jsonString);
+
+            if (success) {
+                this.showSuccessMessage('データをインポートしました');
+                // ページをリロードして新しいデータを表示
+                setTimeout(() => {
+                    location.reload();
+                }, 1000);
+            } else {
+                alert('インポートに失敗しました。ファイル形式を確認してください。');
+            }
+        };
+        reader.readAsText(file);
     }
 };
