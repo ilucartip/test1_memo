@@ -3,7 +3,11 @@
     "allow": [
       "Bash(tree -L 3 /home/yokoyama-haruka/test1_memo/ -I '.appgenius_temp')",
       "Bash(tree -L 3 /home/yokoyama-haruka/bluelamp/test1_memo/ -I '.appgenius_temp')",
-      "Bash(git add .)"
+      "Bash(git add .)",
+      "Bash(git commit -m \"$(cat <<''EOF''\n機能追加: フォルダ移動、使い方ガイド、成功メッセージ\n\n- エディタの無効化機能を追加\n- 使い方ガイドと注意点を追加\n- フォルダ移動機能を実装\n- 成功メッセージ表示機能を追加\n- Live Server設定を追加\n- 非推奨メソッド(substr)をsliceに置き換え\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git remote add origin https://github.com/ilucartip/test1_memo.git)",
+      "Bash(git push -u origin master)",
+      "Bash(git add -A)"
     ],
     "deny": [],
     "ask": []
