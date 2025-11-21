@@ -12,7 +12,9 @@
       "Bash(git push origin master)",
       "Bash(git add README.md)",
       "Bash(git commit -m \"ドキュメント: README.mdを更新\n\n- 公開URLを追加\n- 新機能を反映（フォルダ移動、使い方ガイド、成功メッセージなど）\n- プロジェクト構造を更新（src/からルートに移動）\")",
-      "Bash(git commit -m \"機能追加: データのエクスポート/インポート機能\n\n- エクスポートボタン: 全データをJSONファイルとしてダウンロード\n- インポートボタン: JSONファイルからデータを復元\n- データバックアップ機能により、ブラウザ間でのデータ移行が可能に\n- 上書き確認ダイアログを追加\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")"
+      "Bash(git commit -m \"機能追加: データのエクスポート/インポート機能\n\n- エクスポートボタン: 全データをJSONファイルとしてダウンロード\n- インポートボタン: JSONファイルからデータを復元\n- データバックアップ機能により、ブラウザ間でのデータ移行が可能に\n- 上書き確認ダイアログを追加\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")",
+      "Bash(git remote set-url origin https://github.com/ymmthrk/test1_memo.git)",
+      "Bash(git commit -m \"機能追加: txtファイルのインポート機能\n\n- 📄 txt追加ボタンを追加\n- txtファイルをメモとして追加可能に\n- ファイル名がメモのタイトルになる\n- ファイル内容が本文になる\n- 現在選択中のフォルダに追加される\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\")"
     ],
     "deny": [],
     "ask": []

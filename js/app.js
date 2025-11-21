@@ -150,6 +150,24 @@ function setupEventListeners() {
         });
     }
 
+    // txtインポートボタン
+    const importTxtBtn = document.getElementById('importTxtBtn');
+    const importTxtInput = document.getElementById('importTxtInput');
+    if (importTxtBtn && importTxtInput) {
+        importTxtBtn.addEventListener('click', function() {
+            importTxtInput.click();
+        });
+
+        importTxtInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                UI.importTxtFile(file);
+            }
+            // ファイル選択をリセット
+            importTxtInput.value = '';
+        });
+    }
+
     // キーボードショートカット
     setupKeyboardShortcuts();
 

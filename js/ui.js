@@ -482,5 +482,42 @@ const UI = {
             }
         };
         reader.readAsText(file);
+    },
+
+    /**
+     * txtファイルをメモとしてインポート
+     * @param {File} file - インポートするtxtファイル
+     */
+    importTxtFile: function(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const content = e.target.result;
+
+            // ファイル名から拡張子を除いたものをタイトルにする
+            const title = file.name.replace(/\.txt$/i, '');
+
+            // 現在選択中のフォルダIDを取得
+            const currentFolderId = SettingsManager.getCurrentFolderId();
+
+            // 新しいメモを作成
+            const newMemo = MemoManager.create(currentFolderId);
+
+            // タイトルと本文を更新
+            MemoManager.update(newMemo.id, {
+                title: title,
+                content: content
+            });
+
+            // 新しいメモを選択状態にする
+            SettingsManager.setCurrentMemoId(newMemo.id);
+
+            // UIを更新
+            this.renderMemos();
+            this.loadMemoToEditor(newMemo.id);
+
+            // 成功メッセージを表示
+            this.showSuccessMessage(`「${title}」をインポートしました`);
+        };
+        reader.readAsText(file);
     }
 };
